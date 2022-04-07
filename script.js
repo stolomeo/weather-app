@@ -40,11 +40,11 @@ const displayData = (newData) => {
 const handleEvent = (e) => {
   e.preventDefault();
   let location = searchInput.value;
-  let url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=3b6208a31f3ddbc9ccd1d6206a490def&units=imperial`;
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=3b6208a31f3ddbc9ccd1d6206a490def&units=imperial`;
   getData(url);
 };
 getData(
-  "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=3b6208a31f3ddbc9ccd1d6206a490def&units=imperial"
+  "https://api.openweathermap.org/data/2.5/weather?q=London&APPID=3b6208a31f3ddbc9ccd1d6206a490def&units=imperial"
 );
 searchInput.addEventListener("search", handleEvent);
 searchButton.addEventListener("click", handleEvent);
