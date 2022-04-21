@@ -4,12 +4,12 @@ const searchButton = document.querySelector("button");
 const getData = async (url) => {
   const response = await fetch(url, { mode: "cors" });
   const weatherData = await response.json();
-  console.log(weatherData);
-  const newData = processData(weatherData);
-  displayData(newData);
+  return weatherData;
 };
-const processData = (weatherData) => {
-  myData = {
+
+const processData = async (url) => {
+  const weatherData = await getData(url);
+  return {
     name: weatherData.name,
     description: weatherData.weather[0].description,
     icon: weatherData.weather[0].icon,
@@ -18,10 +18,10 @@ const processData = (weatherData) => {
     humidity: weatherData.main.humidity + "°F",
     wind: weatherData.wind.speed.toFixed(0) + " mph",
   };
-  return myData;
 };
 
-const displayData = (newData) => {
+const displayData = async (url) => {
+  const newData = await processData(url);
   const nameEl = (document.querySelector(".name").textContent = newData.name);
   const descriptionEl = (document.querySelector(".description").textContent =
     newData.description);
@@ -41,10 +41,11 @@ const handleEvent = (e) => {
   e.preventDefault();
   let location = searchInput.value;
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=3b6208a31f3ddbc9ccd1d6206a490def&units=imperial`;
-  getData(url);
+  displayData(url);
 };
-getData(
-  "https://api.openweathermap.org/data/2.5/weather?q=London&APPID=3b6208a31f3ddbc9ccd1d6206a490def&units=imperial"
+
+displayData(
+  "https://api.openweathermap.org/data/2.5/weather?q=london&APPID=3b6208a31f3ddbc9ccd1d6206a490def&units=imperial"
 );
 searchInput.addEventListener("search", handleEvent);
 searchButton.addEventListener("click", handleEvent);
