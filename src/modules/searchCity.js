@@ -12,3 +12,5 @@ const searchCity = (e) => {
 
 searchInput.addEventListener("search", searchCity);
 searchButton.addEventListener("click", searchCity);
+
+export default searchCiity;
