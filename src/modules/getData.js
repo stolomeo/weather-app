@@ -1,7 +1,11 @@
 const getData = async (url) => {
-  const response = await fetch(url, { mode: "cors" });
-  const weatherData = await response.json();
-  return weatherData;
+  try {
+    const response = await fetch(url, { mode: "cors" });
+    const weatherData = await response.json();
+    return weatherData;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export default getData;
